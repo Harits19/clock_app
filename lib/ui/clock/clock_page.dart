@@ -1,12 +1,6 @@
-import 'dart:async';
-import 'dart:developer';
-import 'package:clock_app/base/base_constanta.dart';
-import 'package:clock_app/base/base_function.dart';
 import 'package:clock_app/ui/clock/views/alarm_time_view.dart';
 import 'package:clock_app/ui/clock/views/clock_analog_view.dart';
-import 'package:clock_app/ui/clock/views/flutter_analog_clock_painter_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class ClockPage extends StatefulWidget {
   const ClockPage({Key? key}) : super(key: key);
@@ -31,8 +25,8 @@ class _ClockPageState extends State<ClockPage> {
           padding: const EdgeInsets.all(24),
           child: Column(
             children: [
-              Expanded(flex: 5, child: ClockAnalogView()),
-              Expanded(flex: 5, child: AlarmTimeView()),
+              const Expanded(flex: 5, child: ClockAnalogView()),
+              const Expanded(flex: 5, child: AlarmTimeView()),
             ],
           ),
         ),

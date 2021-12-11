@@ -19,7 +19,7 @@ class _ClockAnalogViewState extends State<ClockAnalogView> {
   late DateTime currentTime;
 
   saveConfigTimeToLocal() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final prefs = await SharedPreferences.getInstance();
     await prefs.setInt(configMinuteKey, configMinute);
   }
 
@@ -40,7 +40,7 @@ class _ClockAnalogViewState extends State<ClockAnalogView> {
   }
 
   getConfigTimeFromLocal() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final prefs = await SharedPreferences.getInstance();
     configMinute = prefs.getInt(configMinuteKey) ?? 0;
     updateCurrentTimeWithConfigMinute();
     setState(() {});

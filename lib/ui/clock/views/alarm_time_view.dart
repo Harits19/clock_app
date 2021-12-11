@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:clock_app/base/base_constanta.dart';
 import 'package:clock_app/base/base_function.dart';
 import 'package:clock_app/ui/clock/views/gesture_detector_widget.dart';
@@ -18,24 +16,26 @@ class _AlarmTimeViewState extends State<AlarmTimeView> {
   bool isAlarmActive = false;
 
   saveAlarmTimeToLocal() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final prefs = await SharedPreferences.getInstance();
     await prefs.setString(alarmTimeKey, alarmTime.format(context));
   }
 
   saveIsAlarmActive() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final prefs = await SharedPreferences.getInstance();
     await prefs.setBool(isAlarmActiveKey, isAlarmActive);
   }
 
   getIsAlarmActive() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final prefs = await SharedPreferences.getInstance();
     isAlarmActive = prefs.getBool(isAlarmActiveKey) ?? false;
     setState(() {});
   }
 
   getAlarmTimeFromLocal() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    alarmTime = parseToTimeOfDay(prefs.getString(alarmTimeKey) ?? "00:00");
+    final prefs = await SharedPreferences.getInstance();
+    final tempAlarmTime = stringToTimeOfDay(prefs.getString(alarmTimeKey));
+    if (tempAlarmTime == null) return;
+    alarmTime = tempAlarmTime;
     setState(() {});
   }
 
@@ -48,6 +48,7 @@ class _AlarmTimeViewState extends State<AlarmTimeView> {
 
   @override
   Widget build(BuildContext context) {
+    // getAlarmTimeFromLocal();
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -80,8 +81,8 @@ class _AlarmTimeViewState extends State<AlarmTimeView> {
         ),
         Switch(
           value: isAlarmActive,
-          onChanged: (val) {
-            isAlarmActive = val;
+          onChanged: (isActive) {
+            isAlarmActive = isActive;
             setState(() {});
             saveIsAlarmActive();
           },
