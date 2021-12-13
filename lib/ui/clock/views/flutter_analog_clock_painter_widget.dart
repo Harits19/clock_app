@@ -18,7 +18,7 @@ class FlutterAnalogClockPainterWidget extends CustomPainter {
     '11',
     '12'
   ];
-  final DateTime _datetime;
+  final TimeOfDay _timeOfDay;
   final Color dialPlateColor;
   final Color hourHandColor;
   final Color minuteHandColor;
@@ -41,7 +41,7 @@ class FlutterAnalogClockPainterWidget extends CustomPainter {
   );
 
   FlutterAnalogClockPainterWidget(
-    this._datetime, {
+    this._timeOfDay, {
     this.dialPlateColor = Colors.transparent,
     this.hourHandColor = Colors.black,
     this.minuteHandColor = Colors.black,
@@ -111,10 +111,6 @@ class FlutterAnalogClockPainterWidget extends CustomPainter {
     if (showMinuteHand) {
       _paintMinuteHand(canvas, numberRadius, (radius - borderWidth) / 40);
     }
-    if (showSecondHand) {
-      _paintSecondHand(canvas, numberRadius + hourTextHeight / 2,
-          (radius - borderWidth) / 80);
-    }
 
     //draw center point
     Paint centerPointPaint = Paint()
@@ -183,7 +179,7 @@ class FlutterAnalogClockPainterWidget extends CustomPainter {
 
   /// draw hour hand
   void _paintHourHand(Canvas canvas, double radius, double strokeWidth) {
-    double angle = _datetime.hour % 12 + _datetime.minute / 60.0 - 3;
+    double angle = _timeOfDay.hour % 12 + _timeOfDay.minute / 60.0 - 3;
     Offset handOffset = Offset(cos(getRadians(angle * 30)) * radius,
         sin(getRadians(angle * 30)) * radius);
     final hourHandPaint = Paint()
@@ -194,7 +190,7 @@ class FlutterAnalogClockPainterWidget extends CustomPainter {
 
   /// draw minute hand
   void _paintMinuteHand(Canvas canvas, double radius, double strokeWidth) {
-    double angle = _datetime.minute - 15.0;
+    double angle = _timeOfDay.minute - 15.0;
     Offset handOffset = Offset(cos(getRadians(angle * 6.0)) * radius,
         sin(getRadians(angle * 6.0)) * radius);
     final hourHandPaint = Paint()
@@ -204,19 +200,10 @@ class FlutterAnalogClockPainterWidget extends CustomPainter {
   }
 
   /// draw second hand
-  void _paintSecondHand(Canvas canvas, double radius, double strokeWidth) {
-    double angle = _datetime.second - 15.0;
-    Offset handOffset = Offset(cos(getRadians(angle * 6.0)) * radius,
-        sin(getRadians(angle * 6.0)) * radius);
-    final hourHandPaint = Paint()
-      ..color = this.secondHandColor
-      ..strokeWidth = strokeWidth;
-    canvas.drawLine(Offset(0, 0), handOffset, hourHandPaint);
-  }
 
   @override
   bool shouldRepaint(FlutterAnalogClockPainterWidget oldDelegate) {
-    return _datetime != oldDelegate._datetime ||
+    return _timeOfDay != oldDelegate._timeOfDay ||
         dialPlateColor != oldDelegate.dialPlateColor ||
         hourHandColor != oldDelegate.hourHandColor ||
         minuteHandColor != oldDelegate.minuteHandColor ||

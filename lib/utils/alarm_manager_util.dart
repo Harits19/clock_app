@@ -36,12 +36,9 @@ checkIsTimeToRunAlarm() async {
   final prefs = await SharedPreferences.getInstance();
   await prefs.reload();
   final alarmTime = stringToTimeOfDay(prefs.getString(alarmTimeKey));
-  final configMinute = prefs.getInt(configMinuteKey);
   final isActive = prefs.getBool(isAlarmActiveKey);
 
-  final updatedDateNow =
-      DateTime.now().add(Duration(minutes: configMinute ?? 0));
-  final now = TimeOfDay.fromDateTime(updatedDateNow);
+  final now = TimeOfDay.now();
   log("time now: $now, alarm time :$alarmTime, ");
   if (alarmTime == null) return;
   if (timeOfDayToDouble(now) == timeOfDayToDouble(alarmTime) &&
