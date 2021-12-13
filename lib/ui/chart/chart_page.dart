@@ -68,6 +68,7 @@ class _ChartPageState extends State<ChartPage> {
     return Scaffold(
       body: SafeArea(
         child: Container(
+          height: double.infinity,
           color: Colors.grey,
           child: SingleChildScrollView(
             scrollDirection: Axis.horizontal,
@@ -75,6 +76,7 @@ class _ChartPageState extends State<ChartPage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     if ((highestPeriod ?? 0) > 0)
                       ...List.generate(
@@ -94,6 +96,7 @@ class _ChartPageState extends State<ChartPage> {
                     return Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
                       child: Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           if (flexWidget > 0)
                             Spacer(
