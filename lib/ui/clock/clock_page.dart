@@ -1,11 +1,7 @@
-import 'dart:convert';
-import 'dart:developer';
-
 import 'package:clock_app/base/base_constanta.dart';
 import 'package:clock_app/base/base_function.dart';
-import 'package:clock_app/models/alarm_model.dart';
 import 'package:clock_app/ui/chart/chart_page.dart';
-import 'package:clock_app/ui/clock/views/flutter_analog_clock_painter_widget.dart';
+import 'package:clock_app/ui/clock/views/analog_clock_painter.dart';
 import 'package:clock_app/ui/clock/views/gesture_detector_widget.dart';
 import 'package:clock_app/utils/local_notification_util.dart';
 import 'package:flutter/material.dart';
@@ -94,11 +90,14 @@ class _ClockPageState extends State<ClockPage> {
                     setState(() {});
                   },
                   onDragEnd: saveAlarmTimeToLocal,
-                  child: SizedBox(
+                  child: Container(
+                    color: Colors.yellow,
                     width: double.infinity,
                     height: double.infinity,
                     child: CustomPaint(
-                      painter: FlutterAnalogClockPainterWidget(alarmTime),
+                      painter: AnalogClockPainter(
+                        timeOfDay: alarmTime,
+                      ),
                     ),
                   ),
                 ),

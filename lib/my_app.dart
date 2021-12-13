@@ -16,7 +16,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       initialRoute: initialRoute,
       routes: <String, WidgetBuilder>{
-        ClockPage.routeName: (_) => ClockPage(),
+        ClockPage.routeName: (_) => const ClockPage(),
         ChartPage.routeName: (_) => const ChartPage(),
       },
       title: 'Flutter Demo',
