@@ -86,7 +86,24 @@ class _AlarmTimeViewState extends State<AlarmTimeView> {
             setState(() {});
             saveIsAlarmActive();
           },
-        )
+        ),
+        // ElevatedButton(
+        //     onPressed: () {
+        //       showNotification();
+        //       return;
+        //       final alarmModel = AlarmModel(
+        //         id: 1,
+        //         alarmTime: "alarmTime",
+        //         pressTimePeriod: 1,
+        //       );
+        //       final alarmModelJson = jsonEncode(alarmModel);
+        //       log(alarmModel.toJson().toString());
+        //       final alarmModelDecode = jsonDecode(alarmModelJson);
+        //       log(alarmModelDecode.toString());
+        //       final alarmModelObject = AlarmModel.fromJson(alarmModelDecode);
+        //       log(alarmModelObject.alarmTime);
+        //     },
+        //     child: Text("Test")),
       ],
     );
   }

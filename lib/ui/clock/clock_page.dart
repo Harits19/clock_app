@@ -1,15 +1,30 @@
+import 'package:clock_app/ui/chart/chart_page.dart';
 import 'package:clock_app/ui/clock/views/alarm_time_view.dart';
 import 'package:clock_app/ui/clock/views/clock_analog_view.dart';
+import 'package:clock_app/utils/local_notification_util.dart';
 import 'package:flutter/material.dart';
 
 class ClockPage extends StatefulWidget {
   const ClockPage({Key? key}) : super(key: key);
+  static const routeName = "/ClockPage";
 
   @override
   _ClockPageState createState() => _ClockPageState();
 }
 
 class _ClockPageState extends State<ClockPage> {
+  @override
+  void initState() {
+    super.initState();
+    _configureSelectNotificationSubject();
+  }
+
+  void _configureSelectNotificationSubject() {
+    selectNotificationSubject.stream.listen((String? payload) async {
+      await Navigator.pushNamed(context, ChartPage.routeName);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     //TODO implement gesture for set alarm,

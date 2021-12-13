@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 class ChartPage extends StatefulWidget {
   const ChartPage({Key? key}) : super(key: key);
 
+  static const routeName = "/ChartPage";
+
   @override
   _ChartPageState createState() => _ChartPageState();
 }

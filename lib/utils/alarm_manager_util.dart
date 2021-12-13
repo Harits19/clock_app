@@ -1,21 +1,27 @@
 import 'dart:developer';
-import 'dart:isolate';
 
 import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
 import 'package:clock_app/base/base_constanta.dart';
 import 'package:clock_app/base/base_function.dart';
 import 'package:clock_app/utils/local_notification_util.dart';
-import 'package:clock_app/utils/prefs_util.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 runAlarmManager() async {
+  final now = DateTime.now();
   await AndroidAlarmManager.periodic(
     const Duration(minutes: 1),
     alarmManagerId, //Different ID for each alarm
     runPeriodicTask,
     wakeup: true, //the device will be woken up when the alarm fires
-    startAt: DateTime.now(),
+    startAt: DateTime(
+      now.year,
+      now.month,
+      now.day,
+      0,
+      0,
+      0,
+    ),
     exact: true,
     allowWhileIdle: true,
   );

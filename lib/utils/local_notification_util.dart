@@ -1,12 +1,27 @@
 import 'dart:developer';
 
+import 'package:clock_app/ui/chart/chart_page.dart';
+import 'package:clock_app/ui/clock/clock_page.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:rxdart/subjects.dart';
 import 'package:timezone/timezone.dart' as tz;
 
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
     FlutterLocalNotificationsPlugin();
+final BehaviorSubject<String?> selectNotificationSubject =
+    BehaviorSubject<String?>();
+
+late final NotificationAppLaunchDetails? notificationAppLaunchDetails;
+String initialRoute = ClockPage.routeName;
 
 initLocalNotification() async {
+  notificationAppLaunchDetails =
+      await flutterLocalNotificationsPlugin.getNotificationAppLaunchDetails();
+  if (notificationAppLaunchDetails?.didNotificationLaunchApp ?? false) {
+    initialRoute = ChartPage.routeName;
+  }
+
   const AndroidInitializationSettings initializationSettingsAndroid =
       AndroidInitializationSettings('app_icon');
   const IOSInitializationSettings initializationSettingsIOS =
@@ -19,7 +34,7 @@ initLocalNotification() async {
   await flutterLocalNotificationsPlugin.initialize(
     initializationSettings,
     onSelectNotification: (payload) {
-      log("notif tasasdpped");
+      selectNotificationSubject.add(payload);
     },
   );
 }
