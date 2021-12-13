@@ -37,7 +37,6 @@ checkIsTimeToRunAlarm() async {
   await prefs.reload();
   final alarmTime = stringToTimeOfDay(prefs.getString(alarmTimeKey));
   final isActive = prefs.getBool(isAlarmActiveKey);
-
   final now = TimeOfDay.now();
   log("time now: $now, alarm time :$alarmTime, ");
   if (alarmTime == null) return;

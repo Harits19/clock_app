@@ -1,7 +1,9 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:clock_app/base/base_constanta.dart';
 import 'package:clock_app/base/base_function.dart';
+import 'package:clock_app/models/alarm_model.dart';
 import 'package:clock_app/ui/chart/chart_page.dart';
 import 'package:clock_app/ui/clock/views/flutter_analog_clock_painter_widget.dart';
 import 'package:clock_app/ui/clock/views/gesture_detector_widget.dart';
@@ -53,8 +55,11 @@ class _ClockPageState extends State<ClockPage> {
 
   getAlarmTimeFromLocal() async {
     final prefs = await SharedPreferences.getInstance();
-    final tempAlarmTime = stringToTimeOfDay(prefs.getString(alarmTimeKey));
-    if (tempAlarmTime == null) return;
+    TimeOfDay? tempAlarmTime = stringToTimeOfDay(prefs.getString(alarmTimeKey));
+    if (tempAlarmTime == null) {
+      tempAlarmTime = const TimeOfDay(hour: 0, minute: 0);
+      await saveAlarmTimeToLocal();
+    }
     alarmTime = tempAlarmTime;
     setState(() {});
   }
@@ -119,23 +124,6 @@ class _ClockPageState extends State<ClockPage> {
                       saveIsAlarmActive();
                     },
                   ),
-                  // ElevatedButton(
-                  //     onPressed: () {
-                  //       showNotification();
-                  //       return;
-                  //       final alarmModel = AlarmModel(
-                  //         id: 1,
-                  //         alarmTime: "alarmTime",
-                  //         pressTimePeriod: 1,
-                  //       );
-                  //       final alarmModelJson = jsonEncode(alarmModel);
-                  //       log(alarmModel.toJson().toString());
-                  //       final alarmModelDecode = jsonDecode(alarmModelJson);
-                  //       log(alarmModelDecode.toString());
-                  //       final alarmModelObject = AlarmModel.fromJson(alarmModelDecode);
-                  //       log(alarmModelObject.alarmTime);
-                  //     },
-                  //     child: Text("Test")),
                 ],
               ),
             ],

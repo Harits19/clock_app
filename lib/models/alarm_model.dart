@@ -5,7 +5,7 @@
 class AlarmModel {
   late int id;
   late String alarmTime;
-  late double pressTimePeriod;
+  late int pressTimePeriod;
 
   AlarmModel({
     required this.id,
