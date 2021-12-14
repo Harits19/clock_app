@@ -9,6 +9,10 @@ TimeOfDay? stringToTimeOfDay(String? s) {
       hour: int.parse(s!.split(":")[0]), minute: int.parse(s.split(":")[1]));
 }
 
+String timeOfDayToString(TimeOfDay timeOfDay) {
+  return "${timeOfDay.hour}:${timeOfDay.minute}";
+}
+
 double timeOfDayToDouble(TimeOfDay myTime) =>
     myTime.hour + myTime.minute / 60.0;
 

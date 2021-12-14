@@ -35,7 +35,7 @@ class _ClockPageState extends State<ClockPage> {
 
   saveAlarmTimeToLocal() async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setString(alarmTimeKey, alarmTime.format(context));
+    await prefs.setString(alarmTimeKey, timeOfDayToString(alarmTime));
   }
 
   saveIsAlarmActive() async {
@@ -114,7 +114,7 @@ class _ClockPageState extends State<ClockPage> {
                   Container(
                     color: Colors.blue,
                     child: Text(
-                      alarmTime.format(context),
+                      timeOfDayToString(alarmTime),
                       style: const TextStyle(
                         fontSize: 40,
                         fontWeight: FontWeight.bold,

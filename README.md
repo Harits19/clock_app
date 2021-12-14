@@ -1,6 +1,6 @@
 # clock_app
 
-A new Flutter project.
+Aplikasi alarm menggunakan gesture untuk mengaturnya dan ada diagram untuk melihat riwayat waktu untuk membuka alarm tersebut.
 
 ## Getting Started
 

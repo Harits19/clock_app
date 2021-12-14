@@ -96,7 +96,7 @@ class AnalogClockPainter extends CustomPainter {
     });
 
     int hour = timeOfDay.hour;
-    if (hour > 12 && hour < 24) {
+    if (hour >= 12 && hour < 24) {
       hour -= 12;
     }
     List.generate(totalTitikJam, (index) {

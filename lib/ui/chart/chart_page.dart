@@ -51,7 +51,7 @@ class _ChartPageState extends State<ChartPage> {
 
     listAlarm.add(AlarmModel(
       id: (listAlarm.isEmpty) ? 0 : listAlarm.last.id + 1,
-      alarmTime: alarmTime.format(context),
+      alarmTime: timeOfDayToString(alarmTime),
       pressTimePeriod: period,
     ));
     final listAlarmEncode = jsonEncode(listAlarm);
