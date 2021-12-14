@@ -27,15 +27,18 @@ class _ChartPageState extends State<ChartPage> {
   }
 
   saveTimePeriodOnClick() async {
-    final now = TimeOfDay.now();
+    final now = DateTime.now();
     log("open notif at $now");
     final prefs = await SharedPreferences.getInstance();
     await prefs.reload();
 
+    final dateTimeAlarmRing = prefs.getString(dateTimeAlarmRingKey);
     final alarmTime = stringToTimeOfDay(prefs.getString(alarmTimeKey));
-    if (alarmTime == null) return;
-    final period = timeToMinute(now) - timeToMinute(alarmTime);
-    log("time to click notif $period");
+
+    if (dateTimeAlarmRing == null || alarmTime == null) return;
+    final period = dateTimeToSecond(now) -
+        dateTimeToSecond(hhMmSs.parse(dateTimeAlarmRing));
+    log("date time alarm ring $dateTimeAlarmRing ,time to click notif $period");
 
     final listAlarmFromLocal = (prefs.getString(alarmTimeChartDataKey));
     if (listAlarmFromLocal?.isNotEmpty ?? false) {
@@ -107,7 +110,7 @@ class _ChartPageState extends State<ChartPage> {
                             child: Container(
                               color: Colors.yellow,
                               child: Text(
-                                " " + e.pressTimePeriod.toString() + " menit ",
+                                " " + e.pressTimePeriod.toString() + " detik ",
                               ),
                             ),
                           ),

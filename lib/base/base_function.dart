@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+
+final hhMmSs = DateFormat("HH:mm:ss");
 
 TimeOfDay? stringToTimeOfDay(String? s) {
   if (s?.isEmpty ?? true) return null;
@@ -11,6 +14,14 @@ double timeOfDayToDouble(TimeOfDay myTime) =>
 
 int timeToMinute(TimeOfDay timeOfDay) {
   return (timeOfDay.hour * 60) + (timeOfDay.minute);
+}
+
+int timeToSecond(TimeOfDay timeOfDay) {
+  return (timeOfDay.hour * 60 * 60) + (timeOfDay.minute * 60);
+}
+
+int dateTimeToSecond(DateTime dateTime) {
+  return (dateTime.hour * 60 * 60) + (dateTime.minute * 60) + (dateTime.second);
 }
 
 extension TimeOfDayExtension on TimeOfDay {
